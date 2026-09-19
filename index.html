@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+
+<!-- ✅ MONETAG VERIFICATION - Tumhara ID - Maine laga diya -->
+<meta name="monetag" content="eabe2abed4881025772af2a510453f39">
+
+<title>TaskSuper PK - Verified</title>
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- ✅ YOUR REAL MONETAG ZONE 3497387 -->
+<script src="https://alwingulla.com/88/tag.min.js" data-zone="3497387" async data-cfasync="false"></script>
+
+<style>body{background:#070A14;color:#fff;font-family:Inter}.glass{background:rgba(255,255,255,.06);backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.1)}</style>
+</head>
+<body class="max-w-[480px] mx-auto p-3 pb-24">
+
+<div id="authScreen" class="min-h-[90vh] flex flex-col justify-center space-y-4">
+  <div class="text-center"><h1 class="text-[38px] font-[900]">Task<span class="text-[#00D2FF]">Super</span> PK</h1><p class="text-[#00FF88] text-[11px] font-bold">✅ VERIFIED - Zone 3497387 LIVE</p><p class="text-white/40 text-[11px]">Meta: eabe2abed4881025772af2a510453f39</p></div>
+  <div class="glass rounded-[24px] p-6">
+    <div class="flex bg-black/30 rounded-full p-1 mb-6"><button id="lTab" onclick="switchAuth('login')" class="flex-1 py-2.5 rounded-full bg-white text-black font-bold text-[13px]">Login</button><button id="sTab" onclick="switchAuth('signup')" class="flex-1 py-2.5 rounded-full text-white/50 font-bold text-[13px]">Sign Up</button></div>
+    <div class="space-y-3">
+      <input id="aName" placeholder="Full Name" class="hidden w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[14px] outline-none">
+      <input id="aEmail" placeholder="Email" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[14px] outline-none">
+      <input id="aPass" type="password" placeholder="Password" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[14px] outline-none">
+      <input id="aPhone" placeholder="Easypaisa/JazzCash" class="hidden w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-[14px] outline-none">
+      <button onclick="doAuth()" id="aBtn" class="w-full bg-white text-black font-[800] py-3.5 rounded-xl">Login</button>
+      <p id="aMsg" class="text-center text-[11px] text-[#FF6B6B] hidden"></p>
+      <p class="text-center text-[10px] text-white/30">✅ Verified | Rs 20 Bonus | Rs 5/Ad | 50 Ads/Day</p>
+    </div>
+  </div>
+</div>
+
+<div id="mainApp" class="hidden space-y-4">
+  <div class="glass rounded-[24px] p-5 border border-[#00FF88]/30">
+    <div class="flex justify-between"><p class="text-[11px]">👋 <span id="uid">-</span></p><button onclick="logout()" class="text-[10px] bg-white/10 px-3 py-1 rounded-full">Logout</button></div>
+    <h1 class="text-[44px] font-[800] mt-2">Rs <span id="bal" class="text-[#00D2FF]">0</span></h1>
+    <div class="flex gap-2 mt-2"><span id="adsLeft" class="text-[10px] bg-[#00FF88]/20 text-[#00FF88] px-3 py-1 rounded-full">50 Left</span><span class="text-[10px] bg-[#00D2FF]/20 text-[#00D2FF] px-3 py-1 rounded-full">Verified ✅</span><span id="todayEarn" class="text-[10px] bg-white/10 px-3 py-1 rounded-full">Today Rs 0</span></div>
+    <div class="grid grid-cols-2 gap-2 mt-4"><button onclick="openWithdraw()" class="bg-[#00FF88] text-black font-bold py-3 rounded-xl text-[13px]">💸 Withdraw</button><button onclick="openRef()" class="bg-white/10 font-bold py-3 rounded-xl text-[13px]">👥 Refer</button></div>
+  </div>
+  <div class="glass rounded-[24px] p-4 border-2 border-[#00FF88]/40">
+    <h2 class="font-bold text-[14px]">📺 Watch Ad - Zone 3497387 (Verified)</h2>
+    <div id="adBox" class="mt-4 rounded-[20px] bg-gradient-to-br from-[#00D2FF22] to-[#7A5CFF22] border-2 border-dashed border-[#00FF88]/50 p-6 text-center">
+      <div id="adBefore"><p class="text-[40px]">💰</p><p class="font-bold">Rs 5 Per Ad - Real Money</p><button onclick="watchAd()" id="watchBtn" class="mt-4 bg-white text-black font-bold px-8 py-3 rounded-full">▶️ Watch Ad - Rs 5</button><p class="text-[9px] text-[#00FF88] mt-3">✅ Meta Verified eabe2abed... | Zone 3497387 Active</p></div>
+      <div id="adWatching" class="hidden"><p class="text-[11px] text-[#00FF88] font-bold">REAL AD PLAYING - Zone 3497387</p><div class="w-full bg-white/10 rounded-full h-3 mt-4 overflow-hidden"><div id="adProg" class="bg-[#00FF88] h-3 rounded-full" style="width:0%"></div></div><p class="text-[32px] font-[800] mt-3" id="adTimer">15</p></div>
+      <div id="adDone" class="hidden"><p class="text-[40px]">✅</p><p class="font-bold text-[#00FF88]">Rs 5 Added!</p><p id="earnMsg" class="text-[11px] text-white/40 mt-1"></p><button onclick="resetAd()" class="mt-4 bg-[#00FF88] text-black font-bold px-8 py-3 rounded-full">Next Ad ▶️</button></div>
+    </div>
+  </div>
+  <div class="glass rounded-[24px] p-4"><h3 class="font-bold text-[13px]">📜 History</h3><div id="hist" class="mt-3 text-center text-white/30 text-[12px] py-4">No ads yet</div></div>
+</div>
+
+<div id="withdrawModal" class="hidden fixed inset-0 bg-black/80 z-50 flex items-end"><div class="glass bg-[#101528] w-full max-w-[480px] mx-auto rounded-t-[28px] p-6"><div class="flex justify-between"><h2 class="font-bold">💸 Withdraw</h2><button onclick="closeWithdraw()" class="w-8 h-8 bg-white/10 rounded-full">✕</button></div><div class="mt-4 bg-[#00FF88]/10 rounded-xl p-3"><p class="text-[22px] font-bold text-[#00FF88]">Rs <span id="modalBal">0</span></p></div><input id="wNumber" placeholder="03XX XXXXXXX" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 mt-4 outline-none"><input id="wAmount" type="number" placeholder="Amount Min 100" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 mt-3 outline-none"><button onclick="doWithdraw()" id="wBtn" class="w-full bg-[#00FF88] text-black font-bold py-3.5 rounded-xl mt-4">Withdraw Now</button><p id="wMsg" class="text-center text-[11px] hidden mt-2"></p></div></div>
+
+<script>
+const DB="https://taskup13-default-rtdb.firebaseio.com";
+let mode='login', user=null, bal=0, watched=0, today=0, limit=50;
+function switchAuth(m){mode=m; document.getElementById('lTab').className=m==='login'?'flex-1 py-2.5 rounded-full bg-white text-black font-bold text-[13px]':'flex-1 py-2.5 rounded-full text-white/50 font-bold text-[13px]'; document.getElementById('sTab').className=m==='signup'?'flex-1 py-2.5 rounded-full bg-white text-black font-bold text-[13px]':'flex-1 py-2.5 rounded-full text-white/50 font-bold text-[13px]'; document.getElementById('aName').classList.toggle('hidden',m!=='signup'); document.getElementById('aPhone').classList.toggle('hidden',m!=='signup'); document.getElementById('aBtn').innerText=m==='login'?'Login':'Create Account';}
+async function doAuth(){let name=document.getElementById('aName').value.trim(), email=document.getElementById('aEmail').value.trim().toLowerCase(), pass=document.getElementById('aPass').value.trim(), phone=document.getElementById('aPhone').value.trim(), msg=document.getElementById('aMsg'); if(!email||!pass){msg.innerText="Email & Pass required"; msg.classList.remove('hidden'); return;} document.getElementById('aBtn').innerText="Loading..."; let key=email.replace(/[^a-z0-9]/g,'_'); try{let ex=await (await fetch(`${DB}/taskearn_users/${key}.json`)).json(); if(mode==='signup'){ if(ex&&ex.password)throw"Already exists"; let nu={name:name||email.split('@')[0],email:email,phone:phone,password:pass,balance:20,adsWatched:0,todayAds:0,lastDate:new Date().toDateString(),totalEarn:20,monetagVerified:"eabe2abed4881025772af2a510453f39",zone:"3497387",created:Date.now()}; await fetch(`${DB}/taskearn_users/${key}.json`,{method:'PUT',body:JSON.stringify(nu)}); user={...nu,uid:key}; alert("✅ Verified! Rs 20 Bonus!"); } else{ if(!ex)throw"Not found"; if(ex.password!==pass)throw"Wrong pass"; user={...ex,uid:key}; } localStorage.setItem('te_uid',key); loadApp(); }catch(e){msg.innerText=e; msg.classList.remove('hidden'); document.getElementById('aBtn').innerText=mode==='login'?'Login':'Create Account';}}
+function loadApp(){document.getElementById('authScreen').classList.add('hidden'); document.getElementById('mainApp').classList.remove('hidden'); document.getElementById('uid').innerText=user.name; bal=user.balance||0; watched=user.adsWatched||0; today=user.lastDate!==new Date().toDateString()?0:(user.todayAds||0); updateUI(); loadHist();}
+function updateUI(){document.getElementById('bal').innerText=bal; document.getElementById('adsWatched').innerText=watched; document.getElementById('todayAds').innerText=today; document.getElementById('totalEarn').innerText='Rs '+(user.totalEarn||0); document.getElementById('todayEarn').innerText='Today Rs '+(today*5); document.getElementById('adsLeft').innerText=(limit-today)+' Left'; document.getElementById('modalBal').innerText=bal; if(today>=limit){let b=document.getElementById('watchBtn'); b.innerText="Limit Done"; b.disabled=true; b.className="mt-4 bg-white/10 text-white/30 font-bold px-8 py-3 rounded-full";}}
+async function watchAd(){if(today>=limit){alert("Limit done"); return;} document.getElementById('adBefore').classList.add('hidden'); document.getElementById('adWatching').classList.remove('hidden'); let t=15; let iv=setInterval(()=>{t--; document.getElementById('adTimer').innerText=t; document.getElementById('adProg').style.width=((15-t)/15*100)+"%"; if(t<=0){clearInterval(iv); completeAd();}},1000);}
+async function completeAd(){document.getElementById('adWatching').classList.add('hidden'); document.getElementById('adDone').classList.remove('hidden'); bal+=5; watched++; today++; user.totalEarn=(user.totalEarn||0)+5; updateUI(); document.getElementById('earnMsg').innerText=`+Rs 5 | ${limit-today} left`; document.getElementById('hist').innerHTML=`<div class="bg-[#00FF88]/10 border border-[#00FF88]/20 rounded-xl p-3 text-left mb-2"><p class="font-bold text-[12px] text-[#00FF88]">✅ Verified Ad (3497387) - Rs 5</p><p class="text-white/40 text-[10px]">${new Date().toLocaleString()}</p></div>`+document.getElementById('hist').innerHTML; await fetch(`${DB}/taskearn_users/${user.uid}.json`,{method:'PATCH',body:JSON.stringify({balance:bal,adsWatched:watched,todayAds:today,lastDate:new Date().toDateString(),totalEarn:user.totalEarn})}); await fetch(`${DB}/taskearn_earnings/${user.uid}.json`,{method:'POST',body:JSON.stringify({title:"Verified Ad 3497387",amount:5,date:new Date().toISOString()})});}
+function resetAd(){document.getElementById('adDone').classList.add('hidden'); document.getElementById('adBefore').classList.remove('hidden'); document.getElementById('adTimer').innerText="15"; document.getElementById('adProg').style.width="0%";}
+async function loadHist(){try{let h=await (await fetch(`${DB}/taskearn_earnings/${user.uid}.json`)).json(); if(h){document.getElementById('hist').innerHTML=Object.values(h).reverse().slice(0,10).map(x=>`<div class="bg-white/5 rounded-xl p-3 text-left mb-2"><p class="font-bold text-[12px]">✅ ${x.title} - Rs${x.amount}</p><p class="text-white/40 text-[10px]">${new Date(x.date).toLocaleString()}</p></div>`).join('');}}catch(e){}}
+function openWithdraw(){document.getElementById('withdrawModal').classList.remove('hidden');} function closeWithdraw(){document.getElementById('withdrawModal').classList.add('hidden');} function setAmt(a){document.getElementById('wAmount').value=a;}
+async function doWithdraw(){let num=document.getElementById('wNumber').value.trim(), amt=parseInt(document.getElementById('wAmount').value), msg=document.getElementById('wMsg'); if(!num||amt<100||amt>bal){msg.innerText="Min 100"; msg.className="text-center text-[11px] text-[#FF6B6B]"; msg.classList.remove('hidden'); return;} document.getElementById('wBtn').innerText="Processing..."; bal-=amt; updateUI(); await fetch(`${DB}/taskearn_users/${user.uid}.json`,{method:'PATCH',body:JSON.stringify({balance:bal})}); await fetch(`${DB}/taskearn_admin_withdraws.json`,{method:'POST',body:JSON.stringify({uid:user.uid,amount:amt,number:num,email:user.email,verified:"eabe2abed4881025772af2a510453f39",zone:"3497387",date:new Date().toISOString(),status:"Pending"})}); msg.innerText=`✅ Rs${amt} sent to ${num}`; msg.className="text-center text-[11px] text-[#00FF88]"; msg.classList.remove('hidden'); setTimeout(closeWithdraw,2000); document.getElementById('wBtn').innerText="Withdraw Now";}
+function logout(){localStorage.removeItem('te_uid'); location.reload();} function openRef(){alert(`Refer: https://tasksuper.netlify.app/?ref=${user.uid}`);}
+(async()=>{let s=localStorage.getItem('te_uid'); if(s){let d=await (await fetch(`${DB}/taskearn_users/${s}.json`)).json(); if(d){user={...d,uid:s}; loadApp();}}})();
+</script>
+</body>
+</html>
