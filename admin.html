@@ -1,0 +1,330 @@
+<!DOCTYPE html><html><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Admin Panel</title><script src="https://cdn.tailwindcss.com"></script></head>
+<body class="bg-[#070A14] text-white p-3 max-w-[900px] mx-auto">
+
+<!-- ADMIN LOGIN SCREEN - HAR REFRESH PAR LOGIN -->
+<div id="adminLoginScreen" class="fixed inset-0 bg-[#070A14] z-[999] flex items-center justify-center p-4">
+  <div class="bg-[#101528] border-2 border-[#00FF88]/40 rounded-[24px] p-6 w-full max-w-[380px]">
+    <div class="text-center">
+      <h1 class="text-[28px] font-[900]">Admin<span class="text-[#00FF88]"> Login</span></h1>
+      <p class="text-[11px] text-white/40 mt-1">Har refresh par login karna padega - Security</p>
+    </div>
+    <div class="mt-6 space-y-3">
+      <input id="adminEmail" placeholder="Admin Email" value="admin@tasksuper.pk" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-[14px] outline-none">
+      <input id="adminPass" type="password" placeholder="Admin Password" class="w-full bg-black border border-white/10 rounded-xl px-4 py-3 text-[14px] outline-none">
+      <p class="text-[10px] text-white/30"></p>
+      <button onclick="doAdminLogin()" id="adminLoginBtn" class="w-full bg-[#00FF88] text-black font-bold py-3.5 rounded-xl">🔐 Login - Admin Panel</button>
+      <p id="adminLoginError" class="hidden text-[11px] text-[#FF3B30] text-center bg-[#FF3B30]/10 border border-[#FF3B30]/30 rounded-xl p-2"></p>
+    </div>
+    <div class="mt-4 bg-white/5 rounded-xl p-3">
+      <p class="text-[10px] font-bold">🔒 Security Feature:</p>
+      <p class="text-[9px] text-white/40 mt-1">• Har refresh par login required hai</p>
+      <p class="text-[9px] text-white/40">• Browser close par auto logout</p>
+      <p class="text-[9px] text-white/40">• SessionStorage use hota hai</p>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN ADMIN PANEL - LOGIN KE BAAD DIKHEGA -->
+<div id="mainAdminPanel" class="hidden">
+<div class="flex justify-between items-center">
+  <div>
+    <h1 class="text-[24px] font-bold">Admin Panel <span class="text-[#00FF88]">- Secure Login</span></h1>
+    <p class="text-[10px] text-white/40">Logged in: <span id="loggedAdminEmail" class="text-[#00FF88]">-</span> | Har refresh par login</p>
+  </div>
+  <button onclick="adminLogout()" class="bg-[#FF3B30] text-white font-bold px-4 py-2 rounded-xl text-[11px]">🚪 Logout</button>
+</div>
+
+<div class="mt-4 bg-[#00FF88]/10 border-2 border-[#00FF88]/40 p-4 rounded-xl">
+<h2 class="font-bold text-[#00FF88]">💰 Easypaisa Deposit Number - Admin Edit</h2>
+<p class="text-[10px] text-white/40 mt-1">Ye number user ko dikhega - Admin kabhi bhi change kar sakta hai</p>
+<div class="flex gap-2 mt-3">
+<input id="setEasy" placeholder="Easypaisa Number - 03xxxxxxxxx" class="flex-1 bg-black border-2 border-[#00FF88]/50 rounded-xl px-4 py-3 text-[14px] font-bold outline-none">
+<button onclick="saveDepositNumbers()" class="bg-[#00FF88] text-black font-bold px-6 py-3 rounded-xl text-[12px]">💾 Save / Update Number</button>
+</div>
+<p class="text-[11px] mt-3">Current: <span id="curNums" class="font-bold text-[#00FF88] text-[14px]">Loading...</span></p>
+</div>
+
+<div class="mt-4 bg-white/5 border border-white/10 p-4 rounded-xl">
+<h2 class="font-bold text-[13px]">🔐 Change Admin Password</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-2 mt-2">
+<input id="newAdminEmail" placeholder="New Admin Email" class="bg-black border border-white/10 rounded-xl px-3 py-2 text-[12px] outline-none">
+<input id="newAdminPass" placeholder="New Password" class="bg-black border border-white/10 rounded-xl px-3 py-2 text-[12px] outline-none">
+<button onclick="changeAdminCreds()" class="bg-[#00D2FF] text-black font-bold py-2 rounded-xl text-[11px]">Update Login</button>
+</div>
+<p class="text-[9px] text-white/30 mt-1">Yahan se admin email/password change karo - Agli baar naya login use hoga</p>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+<div class="bg-white/5 p-4 rounded-xl border border-white/10">
+<h2 class="font-bold text-[13px]">🎬 Add Task</h2>
+<input id="tTitle" placeholder="Title" class="w-full mt-2 bg-black border border-white/10 rounded-xl px-3 py-2 text-[12px] outline-none">
+<input id="tLink" placeholder="YouTube Link" class="w-full mt-2 bg-black border border-white/10 rounded-xl px-3 py-2 text-[12px] outline-none">
+<div class="grid grid-cols-3 gap-2 mt-2">
+<input id="tReward" placeholder="Reward 10" type="number" value="10" class="bg-black border border-white/10 rounded-xl px-3 py-2 text-[12px]">
+<select id="tType" class="w-full bg-black border border-white/10 rounded-xl px-3 py-2 text-[12px]"><option value="video">Video</option><option value="youtube">YouTube</option><option value="link">Link</option></select>
+<input id="tWatch" placeholder="Sec 60" type="number" value="60" class="bg-black border border-white/10 rounded-xl px-3 py-2 text-[12px]">
+</div>
+<button onclick="addTask()" class="mt-2 w-full bg-[#00D2FF] text-black font-bold py-2.5 rounded-xl text-[12px]">➕ Add Task</button>
+</div>
+<div class="bg-white/5 p-4 rounded-xl border border-white/10">
+<h2 class="font-bold text-[13px]">📢 Green Alert Bar</h2>
+<input id="aTitle" placeholder="Title" class="w-full mt-2 bg-black border border-white/10 rounded-xl px-3 py-2 text-[12px] outline-none">
+<textarea id="aMsg" placeholder="Message" class="w-full mt-2 bg-black border border-white/10 rounded-xl px-3 py-2 text-[12px] outline-none"></textarea>
+<select id="aTo" class="w-full mt-2 bg-black border border-white/10 rounded-xl px-3 py-2 text-[12px] outline-none"><option value="all">All Users</option></select>
+<button onclick="sendAlert()" class="mt-2 w-full bg-[#00FF88] text-black font-bold py-2.5 rounded-xl text-[12px]">📢 Send Alert</button>
+</div>
+</div>
+
+<div class="mt-4 bg-[#FFD60A]/10 border-2 border-[#FFD60A]/40 p-4 rounded-xl">
+<h2 class="font-bold text-[#FFD60A]">💼 Add Plan - Same Time Expire</h2>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-3">
+<input id="pName" placeholder="Plan Name" class="bg-black border border-white/10 rounded-xl px-3 py-2.5 text-[12px] outline-none">
+<input id="pPrice" placeholder="Price - 500" type="number" class="bg-black border border-white/10 rounded-xl px-3 py-2.5 text-[12px] outline-none">
+<input id="pDaily" placeholder="Daily Profit - 50" type="number" class="bg-black border border-white/10 rounded-xl px-3 py-2.5 text-[12px] outline-none">
+<input id="pDays" placeholder="Days - 20 (Usi time expire)" type="number" class="bg-black border border-white/10 rounded-xl px-3 py-2.5 text-[12px] outline-none">
+<input id="pTasks" placeholder="Tasks/Day - e.g. 5" type="number" value="5" class="bg-black border-2 border-[#00FF88] rounded-xl px-3 py-3 text-[13px] font-bold md:col-span-2 outline-none">
+</div>
+<p class="text-[11px] text-[#00FF88] mt-2 font-bold">Plan jitne din ka utne din baad usi time expire hoga</p>
+<button onclick="addPlan()" class="mt-3 w-full bg-[#FFD60A] text-black font-bold py-3 rounded-xl text-[13px]">✅ Add Plan</button>
+</div>
+
+<div class="grid grid-cols-5 gap-2 mt-4">
+<div class="bg-white/5 rounded-xl p-3 text-center"><p class="text-[10px] text-white/40">Total Users</p><p id="statUsers" class="text-[18px] font-bold">0</p></div>
+<div class="bg-[#00FF88]/10 rounded-xl p-3 text-center"><p class="text-[10px] text-white/40">Dep Pending</p><p id="statDep" class="text-[18px] font-bold text-[#00FF88]">0</p></div>
+<div class="bg-[#FFD60A]/10 rounded-xl p-3 text-center"><p class="text-[10px] text-white/40">Pending WD</p><p id="statPending" class="text-[18px] font-bold text-[#FFD60A]">0</p></div>
+<div class="bg-[#00FF88]/10 rounded-xl p-3 text-center"><p class="text-[10px] text-white/40">Total Plans</p><p id="statPlans" class="text-[18px] font-bold text-[#00FF88]">0</p></div>
+<div class="bg-[#00D2FF]/10 rounded-xl p-3 text-center"><p class="text-[10px] text-white/40">Free Limit</p><div class="flex gap-1 justify-center mt-1"><input id="freeTasks" type="number" value="1" class="bg-black w-12 text-center rounded px-1 py-1 text-[11px] outline-none"><button onclick="saveFree()" class="bg-white text-black px-2 py-1 rounded text-[10px] font-bold">Save</button></div></div>
+</div>
+
+<div class="flex gap-2 mt-4 overflow-x-auto pb-2">
+<button onclick="loadDeposits()" class="bg-[#00FF88] text-black px-4 py-2.5 rounded-xl text-[12px] font-bold whitespace-nowrap">💰 Easypaisa Deposits</button>
+<button onclick="loadUsers()" class="bg-white/10 px-4 py-2.5 rounded-xl text-[12px] font-bold whitespace-nowrap">👥 Users</button>
+<button onclick="loadPlansList()" class="bg-white/10 px-4 py-2.5 rounded-xl text-[12px] font-bold whitespace-nowrap">💼 Plans</button>
+<button onclick="loadTasks()" class="bg-white/10 px-4 py-2.5 rounded-xl text-[12px] font-bold whitespace-nowrap">🎬 Tasks</button>
+<button onclick="loadWithdraws()" class="bg-white/10 px-4 py-2.5 rounded-xl text-[12px] font-bold whitespace-nowrap">💸 Withdraws</button>
+<button onclick="loadUPlans()" class="bg-white/10 px-4 py-2.5 rounded-xl text-[12px] font-bold whitespace-nowrap">📊 User Plans</button>
+<button onclick="loadMsgs()" class="bg-white/10 px-4 py-2.5 rounded-xl text-[12px] font-bold whitespace-nowrap">💬 Messages</button>
+</div>
+
+<div id="userSearchBox" class="mt-3 flex gap-2">
+<input id="searchUser" placeholder="🔍 Search by Email / Number / Name" class="flex-1 bg-black border border-white/10 rounded-xl px-4 py-2.5 text-[13px] outline-none">
+<button onclick="searchUsers()" class="bg-white text-black font-bold px-5 py-2.5 rounded-xl text-[12px]">Search</button>
+</div>
+
+<div id="dataBox" class="bg-black/30 rounded-xl p-3 mt-3 min-h-[400px] text-[12px]">Loading...</div>
+</div>
+
+<div id="userEditModal" class="hidden fixed inset-0 bg-black/90 z-[100] flex items-center justify-center p-4">
+<div class="bg-[#101528] border border-white/10 rounded-[20px] p-5 w-full max-w-[400px]">
+<div class="flex justify-between"><h2 class="font-bold">👤 Edit User</h2><button onclick="closeEdit()" class="w-8 h-8 bg-white/10 rounded-full">✕</button></div>
+<div class="mt-4 space-y-3">
+<p class="text-[11px] text-white/40">Email: <span id="eEmail" class="text-white font-bold">-</span></p>
+<p class="text-[11px] text-white/40">Number: <span id="eNumber" class="text-[#00FF88] font-bold">-</span></p>
+<input id="eName" placeholder="Name" class="w-full bg-black border border-white/10 rounded-xl px-4 py-2.5 text-[13px] outline-none">
+<input id="eBalance" placeholder="Balance" type="number" class="w-full bg-black border border-white/10 rounded-xl px-4 py-2.5 text-[13px] outline-none">
+<input id="eTotalEarn" placeholder="Total Earn" type="number" class="w-full bg-black border border-white/10 rounded-xl px-4 py-2.5 text-[13px] outline-none">
+<div class="grid grid-cols-2 gap-2">
+<button onclick="saveUser()" class="bg-[#00FF88] text-black font-bold py-3 rounded-xl text-[13px]">💾 Save</button>
+<button onclick="addBalance()" class="bg-[#FFD60A] text-black font-bold py-3 rounded-xl text-[13px]">➕ Add Bal</button>
+</div>
+<div class="grid grid-cols-3 gap-2">
+<button onclick="banToggle()" id="banBtn" class="bg-[#FF3B30] text-white font-bold py-2.5 rounded-xl text-[11px]">🚫 Ban</button>
+<button onclick="resetPassword()" class="bg-white/10 font-bold py-2.5 rounded-xl text-[11px]">🔑 Reset Pass</button>
+<button onclick="deleteUserConfirm()" class="bg-black border border-[#FF3B30]/50 text-[#FF3B30] font-bold py-2.5 rounded-xl text-[11px]">🗑️ Delete</button>
+</div>
+</div>
+</div>
+</div>
+
+<script>
+const DB="https://taskup13-default-rtdb.firebaseio.com";
+const P_USERS="superpk_v2_users"; const P_TASKS="superpk_v2_tasks"; const P_WD="superpk_v2_withdraws"; const P_AMSG="superpk_v2_admin_msgs"; const P_UMSG="superpk_v2_user_msgs"; const P_PLANS="superpk_v2_plans"; const P_UPLANS="superpk_v2_user_plans"; const P_SETTINGS="superpk_v2_settings"; const P_DEPOSITS="superpk_v2_deposits";
+let allUsersData={}, currentEditId=null, currentEditUser=null;
+
+// ADMIN LOGIN SYSTEM - HAR REFRESH PAR LOGIN
+async function doAdminLogin(){
+  let email=document.getElementById('adminEmail').value.trim().toLowerCase();
+  let pass=document.getElementById('adminPass').value.trim();
+  if(!email||!pass){ showAdminError("Email & Password required"); return; }
+  document.getElementById('adminLoginBtn').innerText="Checking...";
+  try{
+    let adminCreds=await (await fetch(`${DB}/${P_SETTINGS}/adminCreds.json`)).json();
+    let defaultEmail="admin@tasksuper.pk";
+    let defaultPass="admin123";
+    let validEmail=adminCreds? adminCreds.email : defaultEmail;
+    let validPass=adminCreds? adminCreds.password : defaultPass;
+    if(email===validEmail && pass===validPass){
+      sessionStorage.setItem('admin_logged_in','1');
+      sessionStorage.setItem('admin_email',email);
+      document.getElementById('adminLoginScreen').classList.add('hidden');
+      document.getElementById('mainAdminPanel').classList.remove('hidden');
+      document.getElementById('loggedAdminEmail').innerText=email;
+      loadUsers(); loadDepositNums();
+      let f=await (await fetch(`${DB}/${P_SETTINGS}/freeTaskLimit.json`)).json(); if(f!==null) document.getElementById('freeTasks').value=f;
+    } else {
+      showAdminError("❌ Wrong Email or Password! Default: admin@tasksuper.pk / admin123");
+      document.getElementById('adminLoginBtn').innerText="🔐 Login - Admin Panel";
+    }
+  }catch(e){ showAdminError("Error: "+e.message); document.getElementById('adminLoginBtn').innerText="🔐 Login - Admin Panel"; }
+}
+function showAdminError(msg){
+  let el=document.getElementById('adminLoginError');
+  el.innerText=msg; el.classList.remove('hidden');
+  setTimeout(()=>{ el.classList.add('hidden'); }, 4000);
+}
+function adminLogout(){
+  if(!confirm("Logout? Har refresh par phir se login karna padega")) return;
+  sessionStorage.removeItem('admin_logged_in');
+  sessionStorage.removeItem('admin_email');
+  location.reload();
+}
+function checkAdminSession(){
+  let logged=sessionStorage.getItem('admin_logged_in');
+  if(logged==='1'){
+    document.getElementById('adminLoginScreen').classList.add('hidden');
+    document.getElementById('mainAdminPanel').classList.remove('hidden');
+    document.getElementById('loggedAdminEmail').innerText=sessionStorage.getItem('admin_email')||'Admin';
+  } else {
+    document.getElementById('adminLoginScreen').classList.remove('hidden');
+    document.getElementById('mainAdminPanel').classList.add('hidden');
+  }
+}
+async function changeAdminCreds(){
+  let newEmail=document.getElementById('newAdminEmail').value.trim().toLowerCase();
+  let newPass=document.getElementById('newAdminPass').value.trim();
+  if(!newEmail||!newPass) return alert("Email & Password dono likho");
+  if(!confirm(`Change Admin Login?\nNew Email: ${newEmail}\nNew Pass: ${newPass}\n\nAgli baar isi se login karna padega`)) return;
+  await fetch(`${DB}/${P_SETTINGS}/adminCreds.json`,{method:'PUT',body:JSON.stringify({email:newEmail,password:newPass})});
+  alert(`✅ Admin Login Updated!\nEmail: ${newEmail}\nPass: ${newPass}\nAb isi se login karo`);
+  document.getElementById('newAdminEmail').value=""; document.getElementById('newAdminPass').value="";
+}
+
+async function saveDepositNumbers(){
+  let easy=document.getElementById('setEasy').value.trim();
+  if(!easy||easy.length<10) return alert("Sahi Easypaisa number likho");
+  await fetch(`${DB}/${P_SETTINGS}/depositNumbers.json`,{method:'PUT',body:JSON.stringify({easypaisa:easy, number:easy})});
+  alert(`✅ Updated: ${easy}`); loadDepositNums();
+}
+async function loadDepositNums(){
+  try{
+    let s=await (await fetch(`${DB}/${P_SETTINGS}/depositNumbers.json`)).json();
+    if(s){
+      let num=s.easypaisa||s.number||"Not Set";
+      document.getElementById('curNums').innerText=num;
+      document.getElementById('setEasy').value=num!=="Not Set"? num : "";
+    } else { document.getElementById('curNums').innerText="Not Set - Pehle set karo"; }
+  }catch(e){}
+}
+async function updateStats(){
+  let users=await (await fetch(`${DB}/${P_USERS}.json`)).json();
+  let wds=await (await fetch(`${DB}/${P_WD}.json`)).json();
+  let deps=await (await fetch(`${DB}/${P_DEPOSITS}.json`)).json();
+  let plans=await (await fetch(`${DB}/${P_UPLANS}.json`)).json();
+  document.getElementById('statUsers').innerText=users?Object.keys(users).length:0;
+  let pending=0, pendDep=0; if(wds) Object.values(wds).forEach(w=>{ if(w.status==='Pending') pending++; });
+  if(deps) Object.values(deps).forEach(d=>{ if(d.status==='Pending') pendDep++; });
+  document.getElementById('statPending').innerText=pending;
+  document.getElementById('statDep').innerText=pendDep;
+  document.getElementById('statPlans').innerText=plans?Object.keys(plans).length:0;
+}
+async function addPlan(){ let name=document.getElementById('pName').value, price=document.getElementById('pPrice').value, daily=document.getElementById('pDaily').value, days=document.getElementById('pDays').value, tasks=document.getElementById('pTasks').value; if(!name||!price||!daily||!days||!tasks)return alert("All required"); await fetch(`${DB}/${P_PLANS}.json`,{method:'POST',body:JSON.stringify({name,price:parseInt(price),dailyProfit:parseInt(daily),days:parseInt(days),taskLimit:parseInt(tasks),active:true,date:new Date().toISOString()})}); alert(`✅ Plan Added - ${days} din baad usi time expire`); loadPlansList(); updateStats(); }
+async function saveFree(){ let v=document.getElementById('freeTasks').value; await fetch(`${DB}/${P_SETTINGS}/freeTaskLimit.json`,{method:'PUT',body:JSON.stringify(parseInt(v))}); alert("Saved: "+v); }
+async function sendAlert(){ let title=document.getElementById('aTitle').value, msg=document.getElementById('aMsg').value, to=document.getElementById('aTo').value; if(!title||!msg)return alert("Required"); await fetch(`${DB}/${P_AMSG}.json`,{method:'POST',body:JSON.stringify({title,message:msg,to,date:new Date().toISOString()})}); alert("Sent to "+to); }
+async function addTask(){ let title=document.getElementById('tTitle').value, link=document.getElementById('tLink').value, reward=document.getElementById('tReward').value, type=document.getElementById('tType').value, watch=document.getElementById('tWatch').value; if(!title||!link)return alert("Required"); await fetch(`${DB}/${P_TASKS}.json`,{method:'POST',body:JSON.stringify({title,link,reward:parseInt(reward),type,watchTime:parseInt(watch),active:true,date:new Date().toISOString()})}); alert("Task Added"); loadTasks(); }
+
+async function loadDeposits(){
+  let d=await (await fetch(`${DB}/${P_DEPOSITS}.json`)).json();
+  let box=document.getElementById('dataBox');
+  if(!d){ box.innerHTML="<p class='text-center py-20 text-white/30'>No deposits</p>"; return; }
+  let pending=[]; Object.entries(d).forEach(([id,dep])=>{ if(dep.status==='Pending') pending.push([id,dep]); });
+  let html=`<p class="font-bold mb-3 text-[#00FF88]">💰 Pending Easypaisa Deposits: ${pending.length}</p>`;
+  pending.reverse().forEach(([id,dep])=>{
+    html+=`<div class="bg-[#00FF88]/10 border border-[#00FF88]/30 p-3 rounded-xl mb-3">
+      <div class="flex justify-between"><p class="font-bold text-[13px]">Rs ${dep.amount} - Easypaisa Only</p><span class="bg-[#FFD60A] text-black px-2 py-1 rounded-full text-[10px] font-bold">${dep.status}</span></div>
+      <p class="text-[11px] mt-1">👤 ${dep.email} | UID: ${dep.uid}</p>
+      <p class="text-[11px]">📱 Sender: <b class="text-[#00FF88]">${dep.senderNumber}</b> | TID: <b>${dep.trxId}</b></p>
+      <p class="text-[10px] text-white/40">${new Date(dep.date).toLocaleString()}</p>
+      <div class="grid grid-cols-2 gap-2 mt-3">
+        <button onclick="approveDeposit('${id}','${dep.uid}',${dep.amount})" class="bg-[#00FF88] text-black font-bold py-2.5 rounded-xl text-[12px]">✅ Approve Rs ${dep.amount}</button>
+        <button onclick="rejectDeposit('${id}')" class="bg-[#FF3B30] text-white font-bold py-2.5 rounded-xl text-[12px]">❌ Reject</button>
+      </div>
+    </div>`;
+  });
+  box.innerHTML=html||"<p class='text-center py-10'>No pending</p>"; updateStats();
+}
+async function approveDeposit(depId, uid, amount){
+  if(!confirm(`Approve Rs ${amount}? Balance add hoga`)) return;
+  let userData=await (await fetch(`${DB}/${P_USERS}/${uid}.json`)).json();
+  if(!userData){ alert("User not found!"); return; }
+  let newBal=(userData.balance||0)+parseInt(amount);
+  await fetch(`${DB}/${P_USERS}/${uid}.json`,{method:'PATCH',body:JSON.stringify({balance:newBal,totalEarn:(userData.totalEarn||0)+parseInt(amount)})});
+  await fetch(`${DB}/${P_DEPOSITS}/${depId}.json`,{method:'PATCH',body:JSON.stringify({status:"Approved",approvedDate:new Date().toISOString()})});
+  alert(`✅ Approved! Rs ${amount} added to ${userData.email}`); loadDeposits();
+}
+async function rejectDeposit(depId){
+  let reason=prompt("Reject reason:"); if(reason===null) return;
+  await fetch(`${DB}/${P_DEPOSITS}/${depId}.json`,{method:'PATCH',body:JSON.stringify({status:"Rejected",rejectReason:reason})});
+  alert("Rejected"); loadDeposits();
+}
+async function loadUsers(){
+  let d=await (await fetch(`${DB}/${P_USERS}.json`)).json();
+  allUsersData=d||{};
+  let up=await (await fetch(`${DB}/${P_UPLANS}.json`)).json();
+  let free=await (await fetch(`${DB}/${P_SETTINGS}/freeTaskLimit.json`)).json();
+  let freeLimit=free||1;
+  let box=document.getElementById('dataBox');
+  if(!d){ box.innerHTML="<p class='text-center py-20 text-white/30'>No users</p>"; return; }
+  renderUsers(d,up,freeLimit);
+  let sel=document.getElementById('aTo'); sel.innerHTML='<option value="all">All Users</option>'; Object.entries(d).forEach(([id,u])=>{ sel.innerHTML+=`<option value="${id}">${u.email} - ${u.paymentNumber||''}</option>`; });
+  updateStats();
+}
+function renderUsers(data,upData,freeLimit){
+  let box=document.getElementById('dataBox');
+  let html=`<p class="text-[11px] text-white/40 mb-3">Total: ${Object.keys(data).length} Users | Free: ${freeLimit} tasks/day | Easypaisa Only</p>`;
+  Object.entries(data).reverse().forEach(([id,u])=>{
+    let myPlans=[]; if(upData){ Object.values(upData).forEach(p=>{ let buy=new Date(p.buyDate); let expiry=p.expiryDate? new Date(p.expiryDate) : new Date(buy.getTime()+parseInt(p.days)*24*60*60*1000); if(p.uid===id && new Date()<expiry && p.claimedDays < p.days) myPlans.push(p); }); }
+    let taskLimit=myPlans.length>0? myPlans.reduce((s,p)=> s+(p.taskLimit||0),0) : freeLimit;
+    let banned = u.banned?`<span class="bg-[#FF3B30] text-white px-2 py-0.5 rounded-full text-[9px]">BANNED</span>`:`<span class="bg-[#00FF88] text-black px-2 py-0.5 rounded-full text-[9px]">ACTIVE</span>`;
+    html+=`<div class="bg-white/5 border border-white/5 rounded-xl p-3 mb-2">
+      <div class="flex justify-between items-start">
+        <div class="flex-1"><p class="font-bold text-[13px]">${u.name||'No Name'} ${banned}</p>
+        <p class="text-[11px] text-white/60">📧 ${u.email}</p>
+        <p class="text-[11px] text-[#00FF88]">📱 Easypaisa - ${u.paymentNumber||'No Number'} 🔒</p>
+        <p class="text-[11px]">💰 Bal Rs <b class="text-[#00D2FF]">${u.balance||0}</b> | Pass: ${u.password||'-'}</p>
+        <p class="text-[11px] text-[#FFD60A] font-bold">📊 Permission: ${taskLimit} tasks/day | Plans: ${myPlans.length}</p></div>
+        <button onclick="openEdit('${id}')" class="bg-white text-black font-bold px-4 py-2 rounded-full text-[11px] ml-2">Manage</button>
+      </div>
+    </div>`;
+  });
+  box.innerHTML=html;
+}
+function searchUsers(){
+  let q=document.getElementById('searchUser').value.toLowerCase().trim();
+  if(!q){ loadUsers(); return; }
+  let filtered={}; Object.entries(allUsersData).forEach(([id,u])=>{ if((u.email||'').toLowerCase().includes(q) || (u.paymentNumber||'').includes(q) || (u.name||'').toLowerCase().includes(q)){ filtered[id]=u; } });
+  renderUsers(filtered,null,1);
+}
+async function quickAdd(id, amt){ let u=await (await fetch(`${DB}/${P_USERS}/${id}.json`)).json(); let newBal=(u.balance||0)+amt; let newEarn=(u.totalEarn||0)+amt; await fetch(`${DB}/${P_USERS}/${id}.json`,{method:'PATCH',body:JSON.stringify({balance:newBal,totalEarn:newEarn})}); alert(`+Rs ${amt} Added`); loadUsers(); }
+async function quickBan(id){ let u=await (await fetch(`${DB}/${P_USERS}/${id}.json`)).json(); await fetch(`${DB}/${P_USERS}/${id}.json`,{method:'PATCH',body:JSON.stringify({banned:!u.banned})}); loadUsers(); }
+function openEdit(id){ let u=allUsersData[id]; if(!u) return; currentEditId=id; currentEditUser=u; document.getElementById('eEmail').innerText=u.email; document.getElementById('eNumber').innerText='Easypaisa - '+(u.paymentNumber||''); document.getElementById('eName').value=u.name||''; document.getElementById('eBalance').value=u.balance||0; document.getElementById('eTotalEarn').value=u.totalEarn||0; document.getElementById('banBtn').innerText=u.banned?'✅ Unban':'🚫 Ban'; document.getElementById('userEditModal').classList.remove('hidden'); }
+function closeEdit(){ document.getElementById('userEditModal').classList.add('hidden'); }
+async function saveUser(){ let name=document.getElementById('eName').value; let bal=parseInt(document.getElementById('eBalance').value); let earn=parseInt(document.getElementById('eTotalEarn').value); await fetch(`${DB}/${P_USERS}/${currentEditId}.json`,{method:'PATCH',body:JSON.stringify({name,balance:bal,totalEarn:earn})}); alert("Updated"); closeEdit(); loadUsers(); }
+async function addBalance(){ let amt=parseInt(prompt("Kitna add karna hai?")); if(!amt) return; let u=await (await fetch(`${DB}/${P_USERS}/${currentEditId}.json`)).json(); let newBal=(u.balance||0)+amt; let newEarn=(u.totalEarn||0)+amt; await fetch(`${DB}/${P_USERS}/${currentEditId}.json`,{method:'PATCH',body:JSON.stringify({balance:newBal,totalEarn:newEarn})}); alert(`Rs ${amt} Added`); document.getElementById('eBalance').value=newBal; document.getElementById('eTotalEarn').value=newEarn; loadUsers(); }
+async function banToggle(){ await fetch(`${DB}/${P_USERS}/${currentEditId}.json`,{method:'PATCH',body:JSON.stringify({banned:!currentEditUser.banned})}); alert(currentEditUser.banned?"Unbanned":"Banned"); closeEdit(); loadUsers(); }
+async function resetPassword(){ let np=prompt("New Password:", currentEditUser.password||'123456'); if(!np) return; await fetch(`${DB}/${P_USERS}/${currentEditId}.json`,{method:'PATCH',body:JSON.stringify({password:np})}); alert("Reset: "+np); loadUsers(); }
+async function deleteUserConfirm(){ if(!confirm(`DELETE?\n${currentEditUser.email}`)) return; if(!confirm("Final Confirm?")) return; await fetch(`${DB}/${P_USERS}/${currentEditId}.json`,{method:'DELETE'}); alert("Deleted"); closeEdit(); loadUsers(); }
+async function loadPlansList(){ let d=await (await fetch(`${DB}/${P_PLANS}.json`)).json(); let box=document.getElementById('dataBox'); if(!d){box.innerHTML="No plans"; return;} let html=`<p class="font-bold mb-3 text-[#FFD60A]">Plans - Same Time Expire</p>`; Object.entries(d).forEach(([id,p])=>{ html+=`<div class="bg-white/5 border border-[#FFD60A]/20 p-3 rounded-xl mb-2 flex justify-between"><div><p class="font-bold">${p.name} - Rs ${p.price}</p><p class="text-[11px]">Daily Rs ${p.dailyProfit} x ${p.days} = Rs ${p.dailyProfit * p.days}</p><p class="text-[12px] text-[#00FF88] font-bold">✅ ${p.taskLimit||0} Tasks/Day | ${p.days} din baad same time expire</p></div><div class="flex flex-col gap-1"><button onclick="editPlanTasks('${id}',${p.taskLimit||0})" class="bg-[#00FF88]/20 text-[#00FF88] px-3 py-1.5 rounded text-[10px]">Edit</button><button onclick="delPlan('${id}')" class="bg-[#FF3B30] px-3 py-1.5 rounded text-[10px]">Del</button></div></div>`; }); box.innerHTML=html; }
+async function editPlanTasks(id, old){ let n=prompt(`New Tasks/Day? Old: ${old}`, old); if(!n) return; await fetch(`${DB}/${P_PLANS}/${id}.json`,{method:'PATCH',body:JSON.stringify({taskLimit:parseInt(n)})}); loadPlansList(); }
+async function delPlan(id){ if(!confirm("Delete plan?"))return; await fetch(`${DB}/${P_PLANS}/${id}.json`,{method:'DELETE'}); loadPlansList(); }
+async function loadTasks(){ let d=await (await fetch(`${DB}/${P_TASKS}.json`)).json(); let box=document.getElementById('dataBox'); if(!d){box.innerHTML="No tasks"; return;} let html=`<p class="font-bold mb-2">All Tasks</p>`; Object.entries(d).reverse().forEach(([id,t])=>{ html+=`<div class="bg-white/5 p-3 rounded-xl mb-2 flex justify-between"><div><p class="font-bold">${t.title}</p><p class="text-[10px]">Rs ${t.reward} | ${t.watchTime}s | ${t.link}</p></div><button onclick="delTask('${id}')" class="bg-[#FF3B30] px-3 py-1 rounded text-[10px]">Del</button></div>`; }); box.innerHTML=html; }
+async function delTask(id){ await fetch(`${DB}/${P_TASKS}/${id}.json`,{method:'DELETE'}); loadTasks(); }
+async function loadWithdraws(){ let d=await (await fetch(`${DB}/${P_WD}.json`)).json(); let box=document.getElementById('dataBox'); if(!d){box.innerHTML="<p class='text-center py-20'>No withdraws</p>"; return;} let pending=[]; Object.entries(d).forEach(([id,w])=>{ if(w.status==='Pending') pending.push([id,w]); }); let html=`<p class="font-bold mb-3">⏳ Pending Withdraws: ${pending.length}</p>`; pending.reverse().forEach(([id,w])=>{ html+=`<div class="bg-[#FFD60A]/10 border border-[#FFD60A]/30 p-3 rounded-xl mb-3"><p class="font-bold">Rs ${w.amount} - Easypaisa - ${w.number}</p><p class="text-[11px]">${w.email} | ${new Date(w.date).toLocaleString()}</p><div class="grid grid-cols-2 gap-2 mt-2"><button onclick="approveWd('${id}')" class="bg-[#00FF88] text-black font-bold py-2 rounded-xl text-[12px]">✅ Approve</button><button onclick="rejectWd('${id}','${w.uid}',${w.amount})" class="bg-[#FF3B30] text-white font-bold py-2 rounded-xl text-[12px]">❌ Reject + Refund</button></div></div>`; }); box.innerHTML=html||"<p class='text-center py-10'>No pending</p>"; }
+async function approveWd(id){ if(!confirm("Approve?"))return; await fetch(`${DB}/${P_WD}/${id}.json`,{method:'PATCH',body:JSON.stringify({status:"Approved"})}); loadWithdraws(); updateStats(); }
+async function rejectWd(id,uid,amt){ let reason=prompt(`Reject Reason - Rs ${amt} refund hoga:`); if(reason===null)return; let u=await (await fetch(`${DB}/${P_USERS}/${uid}.json`)).json(); if(u){ let nb=(u.balance||0)+parseInt(amt); await fetch(`${DB}/${P_USERS}/${uid}.json`,{method:'PATCH',body:JSON.stringify({balance:nb})}); } await fetch(`${DB}/${P_WD}/${id}.json`,{method:'PATCH',body:JSON.stringify({status:"Rejected",rejectReason:reason})}); alert(`Rejected + Rs ${amt} Refunded`); loadWithdraws(); }
+async function loadUPlans(){ let d=await (await fetch(`${DB}/${P_UPLANS}.json`)).json(); let box=document.getElementById('dataBox'); if(!d){box.innerHTML="No user plans"; return;} let html=`<p class="font-bold mb-2">User Plans - Same Time Expire (Exact days*24h)</p>`; Object.entries(d).reverse().slice(0,100).forEach(([id,p])=>{ let buy=new Date(p.buyDate); let expiry=p.expiryDate? new Date(p.expiryDate) : new Date(buy.getTime()+parseInt(p.days)*24*60*60*1000); let now=new Date(); let expired=now>=expiry; let leftH=Math.ceil((expiry-now)/(1000*60*60)); html+=`<div class="bg-white/5 p-2 rounded-lg mb-2 border ${expired?'border-[#FF3B30]/50':'border-[#00FF88]/20'}"><p class="font-bold text-[12px]">${p.planName} - ${p.email} - ${p.taskLimit||0} tasks | <span class="${expired?'text-[#FF3B30]':'text-[#00FF88]'}">${expired?'EXPIRED':leftH+'h left'}</span></p><p class="text-[10px]">🕐 Buy: ${buy.toLocaleString()}</p><p class="text-[10px] text-[#FFD60A] font-bold">⏰ Expire: ${expiry.toLocaleString()} - Same Time After ${p.days} Days</p><p class="text-[10px]">Claimed ${p.claimedDays}/${p.days} = Rs ${p.totalClaimed} | Status ${p.status}</p></div>`; }); box.innerHTML=html; }
+async function loadMsgs(){ let d=await (await fetch(`${DB}/${P_UMSG}.json`)).json(); let box=document.getElementById('dataBox'); if(!d){box.innerHTML="No messages"; return;} let html=""; Object.entries(d).reverse().slice(0,50).forEach(([id,m])=>{ html+=`<div class="bg-white/5 p-3 rounded-xl mb-2"><p class="font-bold text-[11px]">${m.email}</p><p class="text-[12px] mt-1">${m.message}</p><p class="text-[9px] text-white/30">${new Date(m.date).toLocaleString()}</p></div>`; }); box.innerHTML=html; }
+
+// CHECK LOGIN ON LOAD - HAR REFRESH PAR LOGIN
+checkAdminSession();
+</script>
+</body></html>
